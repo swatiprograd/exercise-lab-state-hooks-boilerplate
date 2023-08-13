@@ -1,13 +1,31 @@
 import './App.css';
 import Data from "./components/Data"
 import Image from "./components/Image"
+import { useEffect, useState } from 'react';
 
 function App() {
-  
+  let localDate = new Date()
+  localDate = localDate.toLocaleTimeString()
+
+  const [currDate, setDate] = useState(localDate);
+  const [displayNewText, setDisplay] = useState(true);
+  const [newText, setText] = useState("New Text Added")
+
+  useEffect(()=>{
+    setText(displayNewText?"New Text Added":null)
+  }
+    ,[displayNewText])
+
   return (
     <div>
     <header>
       <img src="https://s3.ap-south-1.amazonaws.com/kalvi-education.github.io/front-end-web-development/Kalvium-Logo.png" alt=""></img>
+
+      <h3>{currDate}</h3>
+
+      <h2>{newText}</h2>
+      <button onClick={()=>{setDisplay(false)}}>Remove New Text</button>
+      <button onClick={()=>{setDisplay(true)}}>Add New Text</button>
 
       <h3>Kalvium Education</h3>
       
